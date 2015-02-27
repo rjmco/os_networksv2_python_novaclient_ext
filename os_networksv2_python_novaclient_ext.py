@@ -13,7 +13,6 @@
 # limitations under the License.
 
 from novaclient import base
-from novaclient.openstack.common import cliutils
 from novaclient import utils
 
 
@@ -66,7 +65,7 @@ def do_network_create(cs, args):
     Create a network
     """
     network = cs.os_networksv2_python_novaclient_ext.create(args.label,
-                                                           args.cidr)
+                                                            args.cidr)
     utils.print_dict(network._info)
 
 
