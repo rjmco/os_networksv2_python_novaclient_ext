@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from novaclient import base
-from novaclient import utils
+from novaclient.openstack.common import cliutils as utils
 
 
 class Network(base.Resource):
