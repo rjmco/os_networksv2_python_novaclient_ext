@@ -47,6 +47,9 @@ def do_network(cs, args):
     utils.print_dict(network._info)
 
 
+do_network_show = do_network
+
+
 def do_network_list(cs, args):
     """
     List networks
