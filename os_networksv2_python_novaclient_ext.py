@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from novaclient import base
-from novaclient.openstack.common import cliutils as utils
+from novaclient import base, utils
+from novaclient.openstack.common import cliutils
 
 
 class Network(base.Resource):
@@ -38,7 +38,7 @@ class NetworkManager(base.ManagerWithFind):
         return self._create('/os-networksv2', body, 'network')
 
 
-@utils.arg('network_id', metavar='<network_id>', help='ID of network')
+@cliutils.arg('network_id', metavar='<network_id>', help='ID of network')
 def do_network(cs, args):
     """
     Show a network
@@ -54,15 +54,16 @@ def do_network_list(cs, args):
     """
     List networks
     """
+    from novaclient import utils
     networks = cs.os_networksv2_python_novaclient_ext.list()
     utils.print_list(networks, ['ID', 'Label', 'CIDR'])
 
 
-@utils.arg('label', metavar='<network_label>',
-           help='Network label (ex. my_new_network)')
-@utils.arg('cidr', metavar='<cidr>',
-           help='IP block to allocate from (ex. 172.16.0.0/24 or '
-                '2001:DB8::/64)')
+@cliutils.arg('label', metavar='<network_label>',
+              help='Network label (ex. my_new_network)')
+@cliutils.arg('cidr', metavar='<cidr>',
+              help='IP block to allocate from (ex. 172.16.0.0/24 or '
+                   '2001:DB8::/64)')
 def do_network_create(cs, args):
     """
     Create a network
@@ -72,7 +73,7 @@ def do_network_create(cs, args):
     utils.print_dict(network._info)
 
 
-@utils.arg('network_id', metavar='<network_id>', help='ID of network')
+@cliutils.arg('network_id', metavar='<network_id>', help='ID of network')
 def do_network_delete(cs, args):
     """
     Delete a network
